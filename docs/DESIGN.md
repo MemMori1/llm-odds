@@ -453,6 +453,11 @@ llm-odds selftest [--mock]       # 全链路冒烟
 - **M3 ✅（实现层）**：`mcp.py` stdio 子集（initialize / initialized / ping /
   tools.list / tools.call）+ 管道测试过。**待验**：Claude Desktop 等真宿主接通一次
   （需要宿主侧配置，留待人工）。
+- **M2 ✅**：宿主接入完成（hsbg 侧）——`advisor_from_args` 插件优先
+  （`HSBG_ODDS_BIN` → PATH → 兄弟目录），新增 `ask-many` 子进程桥
+  （hsbg `src/hsbg/model_client.py`），`consult()` 改走 `decide_many`；
+  M4-lite 退路（旧直连）保留。宿主 375 测试全绿 / `check` 11/11；
+  真机 `hsbg advise` 8 题全走插件（4B 本地 18.7s）。**插件侧零改动。**
 
 ### 与设计稿的偏差（都是加法，不改既有语义）
 
