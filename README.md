@@ -62,7 +62,7 @@ llama-server @ `127.0.0.1:8090` + 从本机 GGUF 自动推校准温度。字段�
 
 ```json
 {"mcpServers": {"llm-odds": {
-  "command": "/Users/edwa2d4th/Desktop/project/llm-odds/bin/llm-odds",
+  "command": "/path/to/llm-odds/bin/llm-odds",
   "args": ["mcp"]}}}
 ```
 

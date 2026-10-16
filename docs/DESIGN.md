@@ -365,7 +365,7 @@ llm-odds selftest [--mock]       # 全链路冒烟
 
 ```json
 {"mcpServers": {"llm-odds": {
-  "command": "/Users/edwa2d4th/Desktop/project/llm-odds/bin/llm-odds",
+  "command": "/path/to/llm-odds/bin/llm-odds",
   "args": ["mcp"]}}}
 ```
 
