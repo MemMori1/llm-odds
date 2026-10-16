@@ -1,7 +1,7 @@
 # llm-odds · 设计稿（v1）
 
-> 状态：设计稿 · 2026-10-16 · 从 `hsbg-helper` 的模型层抽取。
-> 工作名 `llm-odds`（备选：`prob-oracle` / `model-odds`，定稿前可改，见 §13）。
+> 状态：设计稿（待评审）· 2026-10-16 · 从 `hsbg-helper` 的模型层抽取。
+> 名字已定 `llm-odds`；决策记录见 §13。
 
 ## 0. 一句话
 
@@ -252,8 +252,8 @@ class Backend:
 
 ```
 p_i = softmax(logp_i / T)              T = 校准温度（profile/params，默认查表）
-logp_i 缺字母 → floor = min(seen) − letter_floor_margin（默认 2.0）
-选项数 > max_options（默认 16）→ 截断：给被丢选项留 1/(N+1) 份额，其余按比例扣
+logp_i 缺字母 → floor = min(seen) − letter_floor_margin（默认 2.0；全缺 → −10.0）
+选项数 > max_options（默认 16）→ 截断：给被丢选项留 1/(N+1) 份额（N=原选项数），其余按比例扣
 ```
 
 校准温度表（官方 JevK5）：`2b 1.42 / 4b 1.367(v0.3) / 4b-v0.2 1.532 / 9b 1.089`。
@@ -409,19 +409,27 @@ llm-odds selftest [--mock]       # 全链路冒烟
 
 | 阶段 | 内容 | 验收 |
 |---|---|---|
-| **M0** | 本设计定稿（含契约 schema） | 决策点（§13）拍板 |
+| **M0** | 本设计定稿（含契约 schema） | 设计评审通过（决策已记录于 §13） |
 | **M1** | 抽 core + backends + server + CLI（mock / llama-server / 假桩全测） | 离线测试全绿；`selftest --mock` 过；与 hsbg 现状对读法 golden 一致 |
 | **M2** | hsbg 接 CLI 形态 + 降级；`consult` 用 `decide_many` | hsbg 全量测试绿；`hsbg advise` / 面板冒烟一致 |
 | **M3** | MCP server + 配置示例 | MCP 管道测试过；Claude Desktop 实机接通一次 |
 | **M4** | 清理：hsbg `provider.py` 瘦身、`model_server.py` → 转发 | hsbg 无重复实现；文档更新 |
 | **M5** | 概率分析增强（按需）：`n_samples` 采样、校准报告、模型 A/B | 用真实场景验收 |
 
-## 13. 开放决策点（需要拍板）
+## 13. 决策记录
 
-1. **名字**：`llm-odds`（推荐）/ `prob-oracle` / `model-odds` / 其它。
-2. **依赖政策**：纯标准库 + 手写 MCP 子集（推荐，和现有生态一致）/ 引官方 `mcp` SDK。
-3. **hsbg 集成形态**：CLI 先行、MCP 二步（推荐）/ 直接 MCP 常驻。
-4. **HTTP daemon**：v2 再说（推荐）/ v1 就要。
+### 已定（2026-10-16）
+
+1. **名字**：`llm-odds`。
+2. **交付形态**：**CLI 与 MCP 都要**（都是 v1 承诺交付物；实现顺序仍按 M1 CLI → M3 MCP）。
+3. **推进方式**：先评审本设计 → 通过后开始 M1 抽取，随后改造 hsbg（M2 / M4）。
+
+### 默认按推荐执行（有异议再改）
+
+4. **MCP 实现**：手写 stdio 子集（零依赖，与现有生态一致）；
+   若遇到宿主兼容性问题，再评估引官方 `mcp` SDK。
+5. **hsbg 集成形态**：先 CLI 子进程（M2），MCP 常驻留到 M3 之后。
+6. **HTTP daemon**：v2 预留，v1 不做。
 
 ## 14. 风险与对策
 
