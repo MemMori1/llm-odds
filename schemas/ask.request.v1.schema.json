@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/MemMori1/llm-odds/schemas/ask.request.v1.schema.json",
+  "title": "llm-odds ask request (v1)",
+  "description": "单题请求。ask_many 的 items 元素与此同构。",
+  "type": "object",
+  "required": ["task"],
+  "properties": {
+    "v": {"const": 1},
+    "id": {"type": "string"},
+    "task": {"enum": ["choice", "noul", "score"]},
+    "evidence": {"type": "string"},
+    "criterion": {"type": "string"},
+    "options": {
+      "description": "choice: 候选；score: 档位；noul 可省略。字符串形态自动分配 id（\"0\",\"1\",…）。",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {"type": "string"},
+          {
+            "type": "object",
+            "required": ["id", "text"],
+            "properties": {
+              "id": {"type": "string", "minLength": 1},
+              "text": {"type": "string"}
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "params": {
+      "description": "请求级参数：覆盖 profile 与内置默认（见 docs/DESIGN.md §7.2）。",
+      "type": "object",
+      "properties": {
+        "backend": {"enum": ["llama-server", "openai", "mock"]},
+        "profile": {"type": "string"},
+        "url": {"type": "string"},
+        "model": {"type": "string"},
+        "temperature": {"type": ["number", "null"], "exclusiveMinimum": 0},
+        "top_k": {"type": "integer", "minimum": 2},
+        "timeout_s": {"type": "number", "exclusiveMinimum": 0},
+        "retries": {"type": "integer", "minimum": 0},
+        "max_options": {"type": "integer", "minimum": 2, "maximum": 16},
+        "option_prefix": {"type": "boolean"},
+        "include_raw": {"type": "boolean"},
+        "template": {"type": "string"},
+        "system": {"type": "string"},
+        "letter_floor_margin": {"type": "number", "minimum": 0},
+        "cache_ttl_s": {"type": "number", "minimum": 0},
+        "cache_prompt": {"type": "boolean"},
+        "mock_probs": {
+          "type": "object",
+          "additionalProperties": {"type": "number", "minimum": 0}
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}
