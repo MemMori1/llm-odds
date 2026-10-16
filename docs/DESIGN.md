@@ -441,6 +441,35 @@ llm-odds selftest [--mock]       # 全链路冒烟
 | MCP 生态兼容性 | 只实现实锤子集 + 管道测试；真有宿主需要高级特性再引 SDK |
 | 多项目抢同一 llama-server | PID / 日志按 profile 隔离；`serve status` 显示端口与归属 |
 
+## 15. 进展与偏差（2026-10-16）
+
+### 已完成
+
+- **M1 ✅**：core（types/protocol/calibrate/session）、backends（llama-server /
+  openai / mock）、registry、server、api、CLI（ask / ask-many / models / serve /
+  selftest）全部落地；离线测试 125 项全绿；`selftest`（含真模型一问）通过。
+  **验收证据**：与 hsbg `provider.py` 同题对照 —— prompt 逐字节一致（700 字符）、
+  tokens_evaluated 一致（206）、校准温度一致（1.532）、概率最大差 0.000e+00。
+- **M3 ✅（实现层）**：`mcp.py` stdio 子集（initialize / initialized / ping /
+  tools.list / tools.call）+ 管道测试过。**待验**：Claude Desktop 等真宿主接通一次
+  （需要宿主侧配置，留待人工）。
+
+### 与设计稿的偏差（都是加法，不改既有语义）
+
+1. 响应新增 `letter` 字段（choice 题选中项字母；非 choice 为 null）——
+   已同步进 `schemas/ask.response.v1.schema.json`（additive）。
+2. `BUILTIN` 的 `url` 留空、由 `port` 拼 URL（profile 只写 port 时不会被打回 8090）；
+   且没有任何档位线索时，学 hsbg 从 `find_gguf()` 推 `size`/温度（4B 不再套 2B 温度）。
+3. `metrics.cache`：CLI 单发默认 `off`；MCP 常驻默认 12s 去重、请求 `cache_ttl_s` 可调。
+4. **M4 计划变更**：原设计是"hsbg `provider.py` 瘦身、model_server 转发"的删除式清理；
+   与用户确认后改为 **M4-lite**——hsbg 保留旧实现，仅作"插件缺席时的退路"，
+   重复代码以文档标注替代移除（风险更小、随时可回退）。
+
+### 尚未做
+
+- Claude Desktop 实机接通（M3 验收项，人工一步）；
+- M5 概率分析增强（n_samples / 校准报告 / A/B，按需）。
+
 ## 附录 A：搬运清单（hsbg → llm-odds）
 
 | hsbg 现状 | 去向 |
