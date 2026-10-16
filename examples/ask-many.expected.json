@@ -1,0 +1,79 @@
+{
+  "v": 1,
+  "results": [
+    {
+      "v": 1,
+      "id": "many-1",
+      "ok": true,
+      "error": null,
+      "task": "choice",
+      "probs": {
+        "0": 0.6,
+        "1": 0.4
+      },
+      "ranked": [
+        {"id": "0", "p": 0.6},
+        {"id": "1", "p": 0.4}
+      ],
+      "choice": "0",
+      "letter": "A",
+      "confidence": 0.6,
+      "noul": null,
+      "score": null,
+      "warnings": [],
+      "model": {
+        "profile": "",
+        "backend": "mock",
+        "name": "mock",
+        "size": "",
+        "temperature": 1.42,
+        "top_k": 40
+      },
+      "metrics": {
+        "elapsed_ms": 0.0,
+        "tokens_evaluated": 0,
+        "missing_letters": 0,
+        "truncated": 0,
+        "cache": "off",
+        "attempts": 0
+      }
+    },
+    {
+      "v": 1,
+      "id": "many-2",
+      "ok": true,
+      "error": null,
+      "task": "noul",
+      "probs": {
+        "true": 0.35,
+        "false": 0.65
+      },
+      "ranked": [
+        {"id": "false", "p": 0.65},
+        {"id": "true", "p": 0.35}
+      ],
+      "choice": null,
+      "letter": null,
+      "confidence": 0.65,
+      "noul": 0.35,
+      "score": null,
+      "warnings": [],
+      "model": {
+        "profile": "",
+        "backend": "mock",
+        "name": "mock",
+        "size": "",
+        "temperature": 1.42,
+        "top_k": 40
+      },
+      "metrics": {
+        "elapsed_ms": 0.0,
+        "tokens_evaluated": 0,
+        "missing_letters": 0,
+        "truncated": 0,
+        "cache": "off",
+        "attempts": 0
+      }
+    }
+  ]
+}

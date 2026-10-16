@@ -1,0 +1,11 @@
+{
+  "v": 1,
+  "id": "example-noul",
+  "task": "noul",
+  "evidence": "It is turn 9, I have 7 minions already on board and one gold chain of Brann Bronzebeard active.",
+  "criterion": "Is buying another battlecry minion now the right play?",
+  "params": {
+    "backend": "mock",
+    "mock_probs": {"true": 0.75, "false": 0.25}
+  }
+}

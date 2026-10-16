@@ -1,0 +1,21 @@
+{
+  "v": 1,
+  "params": {"backend": "mock"},
+  "items": [
+    {
+      "id": "many-1",
+      "task": "choice",
+      "evidence": "Shop has two 4-drops; board has a free slot.",
+      "criterion": "Which purchase is stronger?",
+      "options": ["Cave Hydra 4/4", "Sin'dorei Straight Shot 4/4"],
+      "params": {"mock_probs": {"0": 0.6, "1": 0.4}}
+    },
+    {
+      "id": "many-2",
+      "task": "noul",
+      "evidence": "Freeze the shop with 1 gold left? It is turn 4.",
+      "criterion": "Is freezing the shop correct here?",
+      "params": {"mock_probs": {"true": 0.35, "false": 0.65}}
+    }
+  ]
+}

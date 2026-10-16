@@ -1,0 +1,14 @@
+#!/bin/bash
+# llm-odds 命令行包装器（与 hsbg-helper 的 ./hsbg 同款）。
+#
+# 本机 Python 是 /usr/bin/python3 (3.9.6)，项目零第三方依赖，不需要 venv：
+# 用 PYTHONPATH 指向 src 直接跑，省掉安装步骤。
+#
+# 用法:
+#   ./bin/llm-odds ask req.json
+#   ./bin/llm-odds models
+#   ./bin/llm-odds selftest --mock
+#   ./bin/llm-odds mcp
+set -euo pipefail
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+exec /usr/bin/env PYTHONPATH="$HERE/src${PYTHONPATH:+:$PYTHONPATH}" /usr/bin/python3 -m llm_odds "$@"

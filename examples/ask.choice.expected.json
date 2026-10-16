@@ -1,0 +1,39 @@
+{
+  "v": 1,
+  "id": "example-choice",
+  "ok": true,
+  "error": null,
+  "task": "choice",
+  "probs": {
+    "0": 0.5,
+    "1": 0.3,
+    "2": 0.2
+  },
+  "ranked": [
+    {"id": "0", "p": 0.5},
+    {"id": "1", "p": 0.3},
+    {"id": "2", "p": 0.2}
+  ],
+  "choice": "0",
+  "letter": "A",
+  "confidence": 0.5,
+  "noul": null,
+  "score": null,
+  "warnings": [],
+  "model": {
+    "profile": "",
+    "backend": "mock",
+    "name": "mock",
+    "size": "",
+    "temperature": 1.42,
+    "top_k": 40
+  },
+  "metrics": {
+    "elapsed_ms": 0.0,
+    "tokens_evaluated": 0,
+    "missing_letters": 0,
+    "truncated": 0,
+    "cache": "off",
+    "attempts": 0
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "v": 1,
+  "id": "example-score",
+  "task": "score",
+  "evidence": "Board is weak early but economy is strong; hero power costs 2 gold.",
+  "criterion": "How strong is using the hero power this turn (0 = terrible, 3 = great)?",
+  "options": [
+    "terrible",
+    "weak",
+    "okay",
+    "great"
+  ],
+  "params": {
+    "backend": "mock",
+    "mock_probs": {"0": 0.25, "1": 0.25, "2": 0.25, "3": 0.25}
+  }
+}

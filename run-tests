@@ -1,0 +1,10 @@
+#!/bin/bash
+# 测试入口（零依赖 runner，风格抄 hsbg-helper/tests/run_tests.py）。
+#
+# 用法:
+#   ./run-tests
+#   ./run-tests -v
+#   ./run-tests -k api
+set -euo pipefail
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+exec /usr/bin/env PYTHONPATH="$HERE/src${PYTHONPATH:+:$PYTHONPATH}" /usr/bin/python3 "$HERE/tests/run_tests.py" "$@"

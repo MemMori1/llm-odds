@@ -1,0 +1,16 @@
+{
+  "v": 1,
+  "id": "example-choice",
+  "task": "choice",
+  "evidence": "Turn 6, 9 gold, tavern tier 3. Shop: Deck Swabber 3/3 (Pirate), Freedealing Gambler 3/3 (Pirate), Scallywag 2/1 (Pirate).",
+  "criterion": "Which minion gives the strongest immediate board?",
+  "options": [
+    "Deck Swabber 3/3 (Pirate)",
+    "Freedealing Gambler 3/3 (Pirate)",
+    "Scallywag 2/1 (Pirate)"
+  ],
+  "params": {
+    "backend": "mock",
+    "mock_probs": {"0": 0.5, "1": 0.3, "2": 0.2}
+  }
+}

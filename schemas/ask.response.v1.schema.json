@@ -29,6 +29,10 @@
       }
     },
     "choice": {"type": ["string", "null"]},
+    "letter": {
+      "description": "choice 题选中项在 prompt 里的字母（A/B/C…）；非 choice 题为 null。",
+      "type": ["string", "null"]
+    },
     "confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
     "noul": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
     "score": {"type": ["number", "null"]},
